@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 import { AboutPage } from "./routes/about";
 import { ContactPage } from "./routes/contact";
@@ -50,13 +50,57 @@ function NotFound() {
 }
 
 export function App() {
-  const path = window.location.pathname.replace(/\/$/, "") || "/";
+  const [path, setPath] = useState(() => window.location.pathname.replace(/\/$/, "") || "/");
   const route = ROUTES[path as keyof typeof ROUTES];
   const Page = route?.component ?? NotFound;
 
   useEffect(() => {
     document.title = route?.title ?? "Page not found - PowerBulls Academy";
   }, [route?.title]);
+
+  useEffect(() => {
+    const updatePath = () => {
+      setPath(window.location.pathname.replace(/\/$/, "") || "/");
+    };
+
+    const onClick = (event: MouseEvent) => {
+      if (
+        event.defaultPrevented ||
+        event.button !== 0 ||
+        event.metaKey ||
+        event.ctrlKey ||
+        event.shiftKey ||
+        event.altKey
+      ) {
+        return;
+      }
+
+      const link = (event.target as Element | null)?.closest("a");
+      if (!link || link.target || link.hasAttribute("download")) return;
+
+      const url = new URL(link.href);
+      if (url.origin !== window.location.origin) return;
+
+      const nextPath = url.pathname.replace(/\/$/, "") || "/";
+      if (!(nextPath in ROUTES)) return;
+
+      event.preventDefault();
+      window.history.pushState(null, "", `${url.pathname}${url.search}${url.hash}`);
+      updatePath();
+      if (url.hash) {
+        document.querySelector(url.hash)?.scrollIntoView({ behavior: "smooth" });
+      } else {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+    };
+
+    window.addEventListener("popstate", updatePath);
+    document.addEventListener("click", onClick);
+    return () => {
+      window.removeEventListener("popstate", updatePath);
+      document.removeEventListener("click", onClick);
+    };
+  }, []);
 
   return <Page />;
 }
