@@ -80,12 +80,17 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
       { name: "twitter:site", content: "@Lovable" },
+      {
+        rel: "icon",
+        href: "/favicon.ico", // change this path if your file has a different name or format
+      },
     ],
     links: [
       {
         rel: "stylesheet",
         href: appCss,
       },
+
     ],
   }),
   shellComponent: RootShell,
