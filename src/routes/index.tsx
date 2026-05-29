@@ -3,25 +3,10 @@ import { AnimatePresence, motion } from "motion/react";
 import Hls from "hls.js";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { createFileRoute, Link } from "@tanstack/react-router";
 import { SiteNav } from "@/components/SiteNav";
 import { SiteFooter } from "@/components/SiteFooter";
 
 gsap.registerPlugin(ScrollTrigger);
-
-export const Route = createFileRoute("/")({
-  component: Index,
-  head: () => ({
-    meta: [
-      { title: "PowerBulls Academy — Computer, Development, AI & Trading Coaching" },
-      {
-        name: "description",
-        content:
-          "Personal coaching in computer fundamentals, CCC, web development, AI & machine learning, prompt mastery, AI workflows and trading courses.",
-      },
-    ],
-  }),
-});
 
 const HLS_SRC =
   "https://stream.mux.com/Aa02T7oM1wH5Mk5EEVDYhbZ1ChcdhRsS2m1NYyx4Ua1g.m3u8";
@@ -262,24 +247,24 @@ function Hero() {
           AI & machine learning, prompt mastery and trading — all in one place.
         </p>
         <div className="blur-in inline-flex flex-wrap justify-center gap-4">
-          <Link
-            to="/courses"
+          <a
+            href="/courses"
             className="group relative rounded-full p-[2px] transition-transform hover:scale-105"
           >
             <span className="absolute inset-0 rounded-full opacity-0 group-hover:opacity-100 transition-opacity accent-gradient-animated" />
             <span className="relative block rounded-full bg-text-primary text-bg group-hover:bg-bg group-hover:text-text-primary transition-colors text-sm px-7 py-3.5">
               See Courses
             </span>
-          </Link>
-          <Link
-            to="/trading"
+          </a>
+          <a
+            href="/trading"
             className="group relative rounded-full p-[2px] transition-transform hover:scale-105"
           >
             <span className="absolute inset-0 rounded-full opacity-0 group-hover:opacity-100 transition-opacity accent-gradient-animated" />
             <span className="relative block rounded-full border-2 border-stroke bg-bg text-text-primary group-hover:border-transparent text-sm px-7 py-3.5">
               Trading Courses
             </span>
-          </Link>
+          </a>
         </div>
       </div>
 
@@ -793,7 +778,7 @@ function Contact() {
 /*                                   Page                                     */
 /* -------------------------------------------------------------------------- */
 
-function Index() {
+export function Index() {
   const [isLoading, setIsLoading] = useState(true);
   return (
     <div className="bg-bg text-text-primary font-body min-h-screen">

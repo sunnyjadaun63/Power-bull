@@ -1,23 +1,6 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
 import { motion } from "motion/react";
 import { PageShell } from "@/components/PageShell";
 import logo from "@/assets/powerbulls-logo.jpeg";
-
-export const Route = createFileRoute("/about")({
-  component: AboutPage,
-  head: () => ({
-    meta: [
-      { title: "About — PowerBulls Academy" },
-      {
-        name: "description",
-        content:
-          "PowerBulls Academy in Bulandshahr, UP — personal coaching for computers, development, AI and trading.",
-      },
-      { property: "og:title", content: "About — PowerBulls Academy" },
-      { property: "og:description", content: "Our story, mission and why students choose PowerBulls." },
-    ],
-  }),
-});
 
 const VALUES = [
   { t: "Personal Mentorship", d: "Small batches and 1-on-1 reviews so no question goes unanswered." },
@@ -33,7 +16,7 @@ const STATS = [
   { v: "12+", l: "Courses Offered" },
 ];
 
-function AboutPage() {
+export function AboutPage() {
   return (
     <PageShell
       eyebrow="About PowerBulls"
@@ -65,8 +48,8 @@ function AboutPage() {
               you watch alone.
             </p>
             <div className="mt-8 flex gap-3">
-              <Link to="/courses" className="rounded-full bg-text-primary text-bg text-sm px-5 py-3 hover:opacity-90">Explore Courses</Link>
-              <Link to="/contact" className="rounded-full border border-stroke text-text-primary text-sm px-5 py-3 hover:bg-surface">Visit Us</Link>
+              <a href="/courses" className="rounded-full bg-text-primary text-bg text-sm px-5 py-3 hover:opacity-90">Explore Courses</a>
+              <a href="/contact" className="rounded-full border border-stroke text-text-primary text-sm px-5 py-3 hover:bg-surface">Visit Us</a>
             </div>
           </motion.div>
 

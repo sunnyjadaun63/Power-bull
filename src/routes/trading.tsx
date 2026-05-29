@@ -1,23 +1,6 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
 import { PageShell } from "@/components/PageShell";
 import { CourseCard } from "@/components/CourseCard";
 import { TRADING_COURSES } from "@/data/courses";
-
-export const Route = createFileRoute("/trading")({
-  component: TradingPage,
-  head: () => ({
-    meta: [
-      { title: "Trading Courses — PowerBulls Academy" },
-      {
-        name: "description",
-        content:
-          "Stock market, technical analysis, intraday, options, crypto and algo trading — mentored trading education at PowerBulls Academy.",
-      },
-      { property: "og:title", content: "Trading Courses — PowerBulls Academy" },
-      { property: "og:description", content: "Learn trading from foundation to algo strategies." },
-    ],
-  }),
-});
 
 const TRADING_PLANS = [
   {
@@ -49,7 +32,7 @@ const TRADING_PLANS = [
   },
 ];
 
-function TradingPage() {
+export function TradingPage() {
   return (
     <PageShell
       eyebrow="Trading Curriculum"
@@ -106,12 +89,12 @@ function TradingPage() {
                     </li>
                   ))}
                 </ul>
-                <Link
-                  to="/contact"
+                <a
+                  href="/contact"
                   className="mt-8 inline-flex w-full justify-center rounded-full bg-text-primary text-bg text-sm px-5 py-3 hover:opacity-90"
                 >
                   {p.cta}
-                </Link>
+                </a>
               </div>
             ))}
           </div>

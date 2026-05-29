@@ -1,4 +1,3 @@
-import { Link } from "@tanstack/react-router";
 import { motion } from "motion/react";
 
 export type CourseCardData = {
@@ -59,15 +58,15 @@ export function CourseCard({ c, index = 0 }: { c: CourseCardData; index?: number
             <div className="text-xs text-muted uppercase tracking-[0.2em]">Fee</div>
             <div className="font-display italic text-2xl text-text-primary">{c.price}</div>
           </div>
-          <Link
-            to="/contact"
+          <a
+            href="/contact"
             className="group/btn relative inline-flex rounded-full p-[2px]"
           >
             <span className="absolute inset-0 rounded-full opacity-0 group-hover/btn:opacity-100 transition-opacity accent-gradient-animated" />
             <span className="relative inline-flex items-center gap-1 rounded-full bg-text-primary text-bg text-sm px-5 py-2.5">
               Enroll <span className="text-[10px]">↗</span>
             </span>
-          </Link>
+          </a>
         </div>
       </div>
     </motion.div>

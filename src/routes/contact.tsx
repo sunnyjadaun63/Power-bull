@@ -1,24 +1,7 @@
 import { useState } from "react";
-import { createFileRoute } from "@tanstack/react-router";
 import { motion } from "motion/react";
 import { z } from "zod";
 import { PageShell } from "@/components/PageShell";
-
-export const Route = createFileRoute("/contact")({
-  component: ContactPage,
-  head: () => ({
-    meta: [
-      { title: "Contact — PowerBulls Academy" },
-      {
-        name: "description",
-        content:
-          "Reach PowerBulls Academy in Bulandshahr, UP. Call +91 8650-222288 or email powerbulls11@gmail.com to enroll.",
-      },
-      { property: "og:title", content: "Contact — PowerBulls Academy" },
-      { property: "og:description", content: "Address, phone, email and a contact form to reach PowerBulls Academy." },
-    ],
-  }),
-});
 
 const contactSchema = z.object({
   name: z.string().trim().min(2, "Please enter your name").max(80),
@@ -43,7 +26,7 @@ const INTERESTS = [
   "Algo Trading",
 ];
 
-function ContactPage() {
+export function ContactPage() {
   const [data, setData] = useState<FormState>({
     name: "",
     email: "",

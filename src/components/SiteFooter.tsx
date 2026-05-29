@@ -1,4 +1,3 @@
-import { Link } from "@tanstack/react-router";
 import logo from "@/assets/powerbulls-logo.jpeg";
 
 export function SiteFooter() {
@@ -34,9 +33,9 @@ export function SiteFooter() {
                 { to: "/contact", label: "Contact" },
               ].map((l) => (
                 <li key={l.to}>
-                  <Link to={l.to} className="text-muted hover:text-text-primary transition-colors">
+                  <a href={l.to} className="text-muted hover:text-text-primary transition-colors">
                     {l.label}
-                  </Link>
+                  </a>
                 </li>
               ))}
             </ul>

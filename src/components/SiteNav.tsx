@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { Link } from "@tanstack/react-router";
 import logo from "@/assets/powerbulls-logo.jpeg";
 
 const LINKS = [
@@ -13,6 +12,8 @@ const LINKS = [
 export function SiteNav() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  const currentPath = window.location.pathname.replace(/\/$/, "") || "/";
+
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 60);
     window.addEventListener("scroll", onScroll);
@@ -24,8 +25,8 @@ export function SiteNav() {
       <div
         className={`inline-flex items-center rounded-full backdrop-blur-md border border-white/10 bg-surface/90 px-2 py-2 transition-shadow ${scrolled ? "shadow-md shadow-black/40" : ""}`}
       >
-        <Link
-          to="/"
+        <a
+          href="/"
           aria-label="PowerBulls Academy"
           className="group relative w-9 h-9 rounded-full p-[1.5px] transition-transform hover:scale-110"
         >
@@ -33,21 +34,21 @@ export function SiteNav() {
           <span className="relative flex items-center justify-center w-full h-full rounded-full bg-bg overflow-hidden">
             <img src={logo} alt="PowerBulls" className="w-full h-full object-cover" />
           </span>
-        </Link>
+        </a>
 
         <div className="w-px h-5 bg-stroke mx-1 hidden sm:block" />
 
         <div className="hidden md:flex items-center">
           {LINKS.map((l) => (
-            <Link
+            <a
               key={l.to}
-              to={l.to}
-              className="text-xs sm:text-sm rounded-full px-3 sm:px-4 py-1.5 sm:py-2 text-muted hover:text-text-primary hover:bg-stroke/50 transition-colors"
-              activeProps={{ className: "text-text-primary bg-stroke/50" }}
-              activeOptions={{ exact: true }}
+              href={l.to}
+              className={`text-xs sm:text-sm rounded-full px-3 sm:px-4 py-1.5 sm:py-2 hover:text-text-primary hover:bg-stroke/50 transition-colors ${
+                currentPath === l.to ? "text-text-primary bg-stroke/50" : "text-muted"
+              }`}
             >
               {l.label}
-            </Link>
+            </a>
           ))}
         </div>
 
@@ -61,30 +62,30 @@ export function SiteNav() {
 
         <div className="w-px h-5 bg-stroke mx-1 hidden sm:block" />
 
-        <Link
-          to="/contact"
+        <a
+          href="/contact"
           className="group relative text-xs sm:text-sm rounded-full p-[2px]"
         >
           <span className="absolute inset-0 rounded-full opacity-0 group-hover:opacity-100 transition-opacity accent-gradient-animated" />
           <span className="relative inline-flex items-center gap-1 bg-surface rounded-full backdrop-blur-md px-3 sm:px-4 py-1.5 sm:py-2 text-text-primary">
             Enroll <span className="text-[10px]">↗</span>
           </span>
-        </Link>
+        </a>
       </div>
 
       {open && (
         <div className="md:hidden absolute top-20 left-4 right-4 rounded-2xl border border-stroke bg-surface/95 backdrop-blur-md p-2 flex flex-col">
           {LINKS.map((l) => (
-            <Link
+            <a
               key={l.to}
-              to={l.to}
+              href={l.to}
               onClick={() => setOpen(false)}
-              className="px-4 py-3 text-sm text-muted hover:text-text-primary hover:bg-stroke/40 rounded-xl"
-              activeProps={{ className: "text-text-primary bg-stroke/50" }}
-              activeOptions={{ exact: true }}
+              className={`px-4 py-3 text-sm hover:text-text-primary hover:bg-stroke/40 rounded-xl ${
+                currentPath === l.to ? "text-text-primary bg-stroke/50" : "text-muted"
+              }`}
             >
               {l.label}
-            </Link>
+            </a>
           ))}
         </div>
       )}
