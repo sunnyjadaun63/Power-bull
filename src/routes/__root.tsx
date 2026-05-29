@@ -87,10 +87,10 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         rel: "stylesheet",
         href: appCss,
       },
-      {
-        rel: "icon",
-        href: "/favicon.ico", // change this path if your file has a different name or format
-      },
+      // {
+      //   rel: "icon",
+      //   href: "/favicon.ico", // change this path if your file has a different name or format
+      // },
 
 
     ],
